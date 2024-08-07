@@ -190,8 +190,19 @@ app.get('/api/v1/blog/bulk', async (c) => {
   }).$extends(withAccelerate());
 
   // const body = await c.req.json();
-  const blog = await prisma.post.findMany({});
-  return c.json(blog);
+  const blog = await prisma.post.findMany({
+    select: {
+      content: true,
+      id: true,
+      title: true,
+      author: {
+        select: {
+          name: true
+        }
+      }
+    }
+  });
+  return c.json({blog});
   
 });
 

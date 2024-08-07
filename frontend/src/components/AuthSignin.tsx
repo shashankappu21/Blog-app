@@ -13,9 +13,10 @@ export default function AuthSignin(){
     async function sendRequest() {
         try{
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`,postInputs);
+            console.log(response.data);
             const jwt = response.data;
-            localStorage.setItem("token",jwt);
-            navigate("/blogs/123");
+            localStorage.setItem("token",jwt.jwt);
+            navigate("/blogs");
         }
         catch(e){
             alert('Error while signin');

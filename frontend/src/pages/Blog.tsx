@@ -1,5 +1,24 @@
+import Appbar from "../components/Appbar";
+import Blogcard from "../components/Blogcard";
+import { useBlogs } from "../hooks";
+
 export default function Blog(){
+    const {loading , blogs} = useBlogs();
+    if(loading){
+        return <div>loading...</div>
+    }
     return (
-        <div>Blog page</div>
+        <div>
+            <Appbar />
+            <div className="flex justify-center">
+                <div className="max-w-xl">
+                    
+                    {blogs.map(blog =>
+                        // @ts-ignore 
+                        <Blogcard authorName={blog.author.name} title={blog.title} content={blog.content} publishedDate="07/08/2024" />
+                    )}
+                </div>
+            </div>
+        </div>
     );
 }

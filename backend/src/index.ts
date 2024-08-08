@@ -215,10 +215,20 @@ app.get('/api/v1/blog/:id',async (c) => {
 	const post = await prisma.post.findUnique({
 		where: {
 			id: parseInt(blogid)
-		}
+		},
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      author: {
+        select: {
+          name: true
+        }
+      }
+    }
 	});
 
-	return c.json(post);  
+	return c.json({post});  
 });
 
 export default app

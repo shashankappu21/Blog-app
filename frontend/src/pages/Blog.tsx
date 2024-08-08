@@ -13,9 +13,8 @@ export default function Blog(){
             <div className="flex justify-center">
                 <div className="max-w-xl">
                     
-                    {blogs.map(blog =>
-                        // @ts-ignore 
-                        <Blogcard authorName={blog.author.name} title={blog.title} content={blog.content} publishedDate="07/08/2024" />
+                    {blogs.map(blog => 
+                        <Blogcard id={blog.id} authorName={blog.author.name} title={blog.title} content={blog.content} publishedDate="07/08/2024" />
                     )}
                 </div>
             </div>

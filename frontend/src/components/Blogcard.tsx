@@ -1,36 +1,42 @@
-interface BlogcardProps{
+import { Link } from "react-router-dom";
+
+export interface BlogcardProps{
     authorName: string,
     title: string,
     content: string,
-    publishedDate: string
+    publishedDate: string,
+    id: number
 }
 export default function Blogcard({
     authorName,
     title,
     content,
-    publishedDate
+    publishedDate,
+    id
 }: BlogcardProps){
     return (
-        <div className="border-b pb-4 border-slate-200 p-4 ">
-            <div className="flex">
-                <div className="flex justify-center flex-col"><Avatar name={authorName} size="small"/></div>
-                <div className="font-extralight pl-2">{authorName}</div>
-                <div className="flex justify-center flex-col">
-                    <Circle />
+        <Link to={`/blog/${id}`}>
+            <div className="border-b pb-4 border-slate-200 p-4 cursor-pointer">
+                <div className="flex">
+                    <div className="flex justify-center flex-col"><Avatar name={authorName} size="small"/></div>
+                    <div className="font-extralight pl-2">{authorName}</div>
+                    <div className="flex justify-center flex-col">
+                        <Circle />
+                    </div>
+                    <div className="pl-1 font-thin text-slate-400">{publishedDate}</div>
                 </div>
-                <div className="pl-1 font-thin text-slate-400">{publishedDate}</div>
+                <div className="text-xl font-bold pt-2">
+                    {title}
+                </div>
+                <div className="text-md font-thin">
+                    {content.length > 100?content.slice(0,100)+"...":content}
+                </div>
+                <div className="text-slate-400 text-sm font-thin">
+                    {`${Math.ceil(content.length/100)} min(s) read`}
+                </div>
+                {/* <div className="bg-slate-200 h-1 w-full"></div> */}
             </div>
-            <div className="text-xl font-bold pt-2">
-                {title}
-            </div>
-            <div className="text-md font-thin">
-                {content.length > 100?content.slice(0,100)+"...":content}
-            </div>
-            <div className="text-slate-400 text-sm font-thin">
-                {`${Math.ceil(content.length/100)} min(s) read`}
-            </div>
-            {/* <div className="bg-slate-200 h-1 w-full"></div> */}
-        </div>
+        </Link>
     );
 }
 

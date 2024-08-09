@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useBlog } from "../hooks";
 import FullBlog from "../components/FullBlog";
 import Appbar from "../components/Appbar";
+import BlogSkeleton from "../components/BlogSkeleton";
 
 export default function BlogMain(){
     const { id } = useParams();
@@ -10,9 +11,12 @@ export default function BlogMain(){
         id: id || ""
     });
     if(loading){
+        return (
         <div>
-            Loading...
+            <Appbar />
+            <BlogSkeleton />
         </div>
+        );
     }
     return (
         <div>
